@@ -4,23 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.prs.business.LineItem;
-import com.prs.business.Product;
 import com.prs.business.Request;
-import com.prs.business.User;
 import com.prs.db.LineItemRepo;
 import com.prs.db.RequestRepo;
-import com.prs.db.UserRepo;
 
 @CrossOrigin
 @RestController
@@ -67,7 +56,7 @@ public class LineItemController {
 		// loop thru lis
 		for (LineItem lineItem: lis) {
 			// add (product price * qty) to newTotal
-			newTotal += lineItem.getRequest().getTotal() + (lineItem.getQuantity() * lineItem.getProduct().getPrice());
+			newTotal += (lineItem.getQuantity() * lineItem.getProduct().getPrice());
 		}
 		// set newTotal in request
 		r.setTotal(newTotal);
@@ -76,11 +65,11 @@ public class LineItemController {
 		requestRepo.save(r);
 	}
 
-		
 	@PutMapping("/") 
 	public LineItem update(@RequestBody LineItem lineItem) {
-		return lineItemRepo.save(lineItem);
-			
+		lineItemRepo.save(lineItem);
+		recalculateItemValue(lineItem);
+		return lineItem;
 	}
 			
 	@DeleteMapping("/{id}") 
@@ -88,6 +77,7 @@ public class LineItemController {
 		Optional<LineItem> lineItem = lineItemRepo.findById(id);
 		if (lineItem.isPresent()) {
 			lineItemRepo.delete(lineItem.get());
+			recalculateItemValue(lineItem.get());
 		}
 		else {
 			System.out.println("Delete Error - line item not found for id: "+id);

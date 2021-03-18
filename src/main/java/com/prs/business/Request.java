@@ -1,6 +1,6 @@
 package com.prs.business;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -18,32 +18,14 @@ private String RejectionReason;
 private String DeliveryMode;
 private String Status;
 private double total;
-private LocalDate DateNeeded;
-private LocalDate SubmittedDate;
+private LocalDateTime DateNeeded;
+private LocalDateTime SubmittedDate;
 @ManyToOne
 @JoinColumn(name="UserId")
 private User user;
 
-public Request() {
-	super();
-}
-
 public Request(int id, String description, String justification, String rejectionReason, String deliveryMode,
-		String status, LocalDate dateNeeded, LocalDate submittedDate, User user) {
-	super();
-	this.id = id;
-	this.description = description;
-	this.justification = justification;
-	RejectionReason = rejectionReason;
-	DeliveryMode = deliveryMode;
-	Status = status;
-	DateNeeded = dateNeeded;
-	SubmittedDate = submittedDate;
-	this.user = user;
-}
-
-public Request(int id, String description, String justification, String rejectionReason, String deliveryMode,
-		String status, double total, LocalDate dateNeeded, LocalDate submittedDate, User user) {
+		String status, double total, LocalDateTime dateNeeded, LocalDateTime submittedDate, User user) {
 	super();
 	this.id = id;
 	this.description = description;
@@ -55,6 +37,10 @@ public Request(int id, String description, String justification, String rejectio
 	DateNeeded = dateNeeded;
 	SubmittedDate = submittedDate;
 	this.user = user;
+}
+
+public Request() {
+	super();
 }
 
 public int getId() {
@@ -113,19 +99,19 @@ public void setTotal(double total) {
 	this.total = total;
 }
 
-public LocalDate getDateNeeded() {
+public LocalDateTime getDateNeeded() {
 	return DateNeeded;
 }
 
-public void setDateNeeded(LocalDate dateNeeded) {
+public void setDateNeeded(LocalDateTime dateNeeded) {
 	DateNeeded = dateNeeded;
 }
 
-public LocalDate getSubmittedDate() {
+public LocalDateTime getSubmittedDate() {
 	return SubmittedDate;
 }
 
-public void setSubmittedDate(LocalDate submittedDate) {
+public void setSubmittedDate(LocalDateTime submittedDate) {
 	SubmittedDate = submittedDate;
 }
 
@@ -143,6 +129,7 @@ public String toString() {
 			+ ", RejectionReason=" + RejectionReason + ", DeliveryMode=" + DeliveryMode + ", Status=" + Status
 			+ ", total=" + total + ", DateNeeded=" + DateNeeded + ", SubmittedDate=" + SubmittedDate + ", user=" + user
 			+ "]";
-	}
+}
+
 
 }
