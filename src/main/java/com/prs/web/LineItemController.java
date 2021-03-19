@@ -37,6 +37,7 @@ public class LineItemController {
 	public List<LineItem> getByRequest(@PathVariable int id) {
 		return lineItemRepo.findByRequestId(id);
 	}
+	
 	// add a lineItem
 	@PostMapping("/")
 	public LineItem addLineItem(@RequestBody LineItem li) {
@@ -84,6 +85,6 @@ public class LineItemController {
 		}
 		return lineItem.get();
 			
-		}
+	}
 	
 }

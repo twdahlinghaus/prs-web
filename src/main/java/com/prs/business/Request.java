@@ -1,6 +1,6 @@
 package com.prs.business;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 
@@ -14,28 +14,30 @@ public class Request {
 private int id;
 private String description;
 private String justification;
-private String RejectionReason;
-private String DeliveryMode;
-private String Status;
+private String rejectionReason;
+private String deliveryMode;
+private String status;
 private double total;
-private LocalDateTime DateNeeded;
-private LocalDateTime SubmittedDate;
+private LocalDate dateNeeded;
+private LocalDate submittedDate;
 @ManyToOne
 @JoinColumn(name="UserId")
 private User user;
 
+
+
 public Request(int id, String description, String justification, String rejectionReason, String deliveryMode,
-		String status, double total, LocalDateTime dateNeeded, LocalDateTime submittedDate, User user) {
+		String status, double total, LocalDate dateNeeded, LocalDate submittedDate, User user) {
 	super();
 	this.id = id;
 	this.description = description;
 	this.justification = justification;
-	RejectionReason = rejectionReason;
-	DeliveryMode = deliveryMode;
-	Status = status;
+	this.rejectionReason = rejectionReason;
+	this.deliveryMode = deliveryMode;
+	this.status = status;
 	this.total = total;
-	DateNeeded = dateNeeded;
-	SubmittedDate = submittedDate;
+	this.dateNeeded = dateNeeded;
+	this.submittedDate = submittedDate;
 	this.user = user;
 }
 
@@ -68,27 +70,27 @@ public void setJustification(String justification) {
 }
 
 public String getRejectionReason() {
-	return RejectionReason;
+	return rejectionReason;
 }
 
 public void setRejectionReason(String rejectionReason) {
-	RejectionReason = rejectionReason;
+	this.rejectionReason = rejectionReason;
 }
 
 public String getDeliveryMode() {
-	return DeliveryMode;
+	return deliveryMode;
 }
 
 public void setDeliveryMode(String deliveryMode) {
-	DeliveryMode = deliveryMode;
+	this.deliveryMode = deliveryMode;
 }
 
 public String getStatus() {
-	return Status;
+	return status;
 }
 
 public void setStatus(String status) {
-	Status = status;
+	this.status = status;
 }
 
 public double getTotal() {
@@ -99,20 +101,20 @@ public void setTotal(double total) {
 	this.total = total;
 }
 
-public LocalDateTime getDateNeeded() {
-	return DateNeeded;
+public LocalDate getDateNeeded() {
+	return dateNeeded;
 }
 
-public void setDateNeeded(LocalDateTime dateNeeded) {
-	DateNeeded = dateNeeded;
+public void setDateNeeded(LocalDate dateNeeded) {
+	this.dateNeeded = dateNeeded;
 }
 
-public LocalDateTime getSubmittedDate() {
-	return SubmittedDate;
+public LocalDate getSubmittedDate() {
+	return submittedDate;
 }
 
-public void setSubmittedDate(LocalDateTime submittedDate) {
-	SubmittedDate = submittedDate;
+public void setSubmittedDate(LocalDate submittedDate) {
+	this.submittedDate = submittedDate;
 }
 
 public User getUser() {
@@ -126,8 +128,8 @@ public void setUser(User user) {
 @Override
 public String toString() {
 	return "Request [id=" + id + ", description=" + description + ", justification=" + justification
-			+ ", RejectionReason=" + RejectionReason + ", DeliveryMode=" + DeliveryMode + ", Status=" + Status
-			+ ", total=" + total + ", DateNeeded=" + DateNeeded + ", SubmittedDate=" + SubmittedDate + ", user=" + user
+			+ ", rejectionReason=" + rejectionReason + ", deliveryMode=" + deliveryMode + ", status=" + status
+			+ ", total=" + total + ", dateNeeded=" + dateNeeded + ", submittedDate=" + submittedDate + ", user=" + user
 			+ "]";
 }
 
