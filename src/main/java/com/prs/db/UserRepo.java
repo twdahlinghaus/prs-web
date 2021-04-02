@@ -6,8 +6,8 @@ import com.prs.business.User;
 
 public interface UserRepo extends JpaRepository<User, Integer> {
 
-	User findByUsernameAndPassword(String username, String password);
+//	Optional<User> findByUsernameAndPassword(String username, String password);
 
-
+  User findByUsernameAndPassword(String username, String password);
 
 }

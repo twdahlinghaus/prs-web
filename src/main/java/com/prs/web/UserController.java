@@ -28,11 +28,25 @@ public class UserController {
 	public User getById(@PathVariable int id) {
 		return userRepo.findById(id).get();
 	}
-	//authenticate via GET
+	
+	@GetMapping("/login/{username}/{password}")
+	public User login2(@PathVariable String username, @PathVariable String password) {
+		return userRepo.findByUsernameAndPassword(username, password);
+	}
+	
+//	//authenticate via GET
 	@GetMapping()
 	public User login(@RequestParam String username, @RequestParam String password) {
 		return userRepo.findByUsernameAndPassword(username, password);
 	}
+	
+//	@GetMapping("{username)/{password}")
+//	public ResponseEntity<User> getForLogin(@PathVariable String username, @PathVariable String password) {
+//		Optional<User> user = userRepo.findByUsernameAndPassword(username, password);
+//		return user.isPresent()
+//				? new ResponseEntity<User>(user.get(), HttpStatus.OK)
+//				: new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+//	}
 	
 	//authenticate via POST
 	@PostMapping()
