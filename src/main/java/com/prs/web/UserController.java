@@ -35,7 +35,7 @@ public class UserController {
 	}
 	
 	//authenticate via POST
-	@PostMapping
+	@PostMapping()
 	public User login(@RequestBody User u) {
 		return userRepo.findByUsernameAndPassword(u.getUsername(), u.getPassword());
 	}
